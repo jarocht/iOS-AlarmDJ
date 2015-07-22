@@ -12,13 +12,13 @@ class AlarmTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var settings = SettingsManager().loadSettings()
+        var settings = LocalDataManager().loadSettings()
         
         println(settings.weatherZip)
         
         settings.weatherZip = "49426"
         
-        SettingsManager().saveSettings(settingsContainer: settings)
+        LocalDataManager().saveSettings(settingsContainer: settings)
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -28,7 +28,11 @@ class AlarmTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    /*override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return
+    }*/
     
-
+    /*override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+    }*/
 }
-

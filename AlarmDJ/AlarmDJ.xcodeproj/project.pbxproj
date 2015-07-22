@@ -17,7 +17,7 @@
 		33461D7F1B5FDA83007B122E /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D7E1B5FDA83007B122E /* SettingsTableViewController.swift */; };
 		33461D811B5FDBC2007B122E /* AlarmSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D801B5FDBC2007B122E /* AlarmSettingsViewController.swift */; };
 		33461D831B5FDD22007B122E /* AlarmAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D821B5FDD22007B122E /* AlarmAlertViewController.swift */; };
-		33461D851B5FDF58007B122E /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D841B5FDF58007B122E /* SettingsManager.swift */; };
+		33461D851B5FDF58007B122E /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D841B5FDF58007B122E /* LocalDataManager.swift */; };
 		33461D871B5FEEA0007B122E /* DashboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D861B5FEEA0007B122E /* DashboardTableViewController.swift */; };
 		33461D891B5FEEDB007B122E /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D881B5FEEDB007B122E /* WebViewController.swift */; };
 		33461D8B1B5FF4B9007B122E /* MusicSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D8A1B5FF4B9007B122E /* MusicSelectorViewController.swift */; };
@@ -49,7 +49,7 @@
 		33461D7E1B5FDA83007B122E /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		33461D801B5FDBC2007B122E /* AlarmSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmSettingsViewController.swift; sourceTree = "<group>"; };
 		33461D821B5FDD22007B122E /* AlarmAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmAlertViewController.swift; sourceTree = "<group>"; };
-		33461D841B5FDF58007B122E /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		33461D841B5FDF58007B122E /* LocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		33461D861B5FEEA0007B122E /* DashboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTableViewController.swift; sourceTree = "<group>"; };
 		33461D881B5FEEDB007B122E /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		33461D8A1B5FF4B9007B122E /* MusicSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicSelectorViewController.swift; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 				33461D631B5FC8B0007B122E /* Images.xcassets */,
 				33461D651B5FC8B0007B122E /* LaunchScreen.xib */,
 				33461D5A1B5FC8B0007B122E /* Supporting Files */,
-				33461D841B5FDF58007B122E /* SettingsManager.swift */,
+				33461D841B5FDF58007B122E /* LocalDataManager.swift */,
 				33461D881B5FEEDB007B122E /* WebViewController.swift */,
 				33461D8A1B5FF4B9007B122E /* MusicSelectorViewController.swift */,
 				33461D8C1B5FF4F3007B122E /* NewsSettingsViewController.swift */,
@@ -241,7 +241,7 @@
 			files = (
 				33461D811B5FDBC2007B122E /* AlarmSettingsViewController.swift in Sources */,
 				33461D891B5FEEDB007B122E /* WebViewController.swift in Sources */,
-				33461D851B5FDF58007B122E /* SettingsManager.swift in Sources */,
+				33461D851B5FDF58007B122E /* LocalDataManager.swift in Sources */,
 				33461D8D1B5FF4F3007B122E /* NewsSettingsViewController.swift in Sources */,
 				33461D7F1B5FDA83007B122E /* SettingsTableViewController.swift in Sources */,
 				33461D5F1B5FC8B0007B122E /* AlarmTableViewController.swift in Sources */,
