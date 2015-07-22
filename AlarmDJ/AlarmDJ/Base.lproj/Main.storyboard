@@ -266,6 +266,9 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="gTd-PW-oWf"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="datePicker" destination="EgT-Rj-ckQ" id="g08-fU-CM6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="43g-oa-HQY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -286,7 +289,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HH:MM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8y8-WD-dY4">
-                                            <rect key="frame" x="8" y="8" width="262" height="21"/>
+                                            <rect key="frame" x="8" y="8" width="126" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -333,17 +336,30 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DFJ-GA-r6J">
+                                            <rect key="frame" x="285" y="21" width="51" height="31"/>
+                                        </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AM/PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hiL-yp-gWz">
                                             <rect key="frame" x="142" y="8" width="58" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DFJ-GA-r6J">
-                                            <rect key="frame" x="285" y="21" width="51" height="31"/>
-                                        </switch>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="activeSwitch" destination="DFJ-GA-r6J" id="lvg-WR-OU7"/>
+                                    <outlet property="fridayLabel" destination="BcE-ya-bWn" id="muo-F3-NmT"/>
+                                    <outlet property="mondayLabel" destination="ftT-xp-zcx" id="fJP-cU-afs"/>
+                                    <outlet property="periodLabel" destination="hiL-yp-gWz" id="NrD-7B-Jdm"/>
+                                    <outlet property="saturdayLabel" destination="uH6-Fc-9Rg" id="fIE-Tq-HDA"/>
+                                    <outlet property="sundayLabel" destination="q0q-xR-pHB" id="7jL-cV-GqZ"/>
+                                    <outlet property="thursdayLabel" destination="LCW-n5-iTz" id="Kiv-iR-goy"/>
+                                    <outlet property="timeLabel" destination="8y8-WD-dY4" id="VSd-gD-3k4"/>
+                                    <outlet property="tuesdayLabel" destination="0Xt-RJ-O6o" id="YFc-1l-sTE"/>
+                                    <outlet property="wednesdayLabel" destination="2rc-dF-WUf" id="Z3m-Jv-ybu"/>
+                                    <segue destination="FOp-gu-5Yq" kind="show" identifier="ExistingAlarmSegue" id="AkF-fj-35e"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -354,12 +370,12 @@
                     <navigationItem key="navigationItem" title="Alarms" id="kOw-2D-M9F">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="4CS-Ac-zlR">
                             <connections>
-                                <segue destination="aik-vh-Jd2" kind="show" id="CoG-eG-Jjv"/>
+                                <segue destination="aik-vh-Jd2" kind="show" identifier="SettingsSegue" id="CoG-eG-Jjv"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="XYp-jN-q6f">
                             <connections>
-                                <segue destination="FOp-gu-5Yq" kind="show" id="MCI-bL-IXl"/>
+                                <segue destination="FOp-gu-5Yq" kind="show" identifier="NewAlarmSegue" id="MCI-bL-IXl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -502,4 +518,7 @@
             <point key="canvasLocation" x="41.5" y="497.5"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="AkF-fj-35e"/>
+    </inferredMetricsTieBreakers>
 </document>

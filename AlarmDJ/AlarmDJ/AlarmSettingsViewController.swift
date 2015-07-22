@@ -9,5 +9,11 @@
 import UIKit
 
 class AlarmSettingsViewController: UITableViewController {
+    @IBOutlet weak var datePicker: UIDatePicker!
+    var date: NSDate = NSDate()
+    
+    override func viewWillAppear(animated: Bool) {
+        datePicker.setDate(date, animated: true)
+    }
     
 }

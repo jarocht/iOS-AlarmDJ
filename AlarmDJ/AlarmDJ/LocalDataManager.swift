@@ -62,17 +62,40 @@ class LocalDataManager {
             var days: [Int] = [0,0,0,0,0,0,0]
             var time: NSDate = NSDate()
             var repeat: Bool = false
+            var enabled: Bool = true
             
-            //Pull from storage
+            if defaults.valueForKey("\(Keys.alarmDays)\(i)") != nil {
+                days = defaults.valueForKey("\(Keys.alarmDays)\(i)") as! [Int]
+            }
+            if defaults.valueForKey("\(Keys.alarmTime)\(i)") != nil {
+                time = defaults.valueForKey("\(Keys.alarmTime)\(i)") as! NSDate
+            }
+            if defaults.valueForKey("\(Keys.alarmRepeat)\(i)") != nil {
+                repeat = defaults.valueForKey("\(Keys.alarmRepeat)\(i)") as! Bool
+            }
+            if defaults.valueForKey("\(Keys.alarmEnabled)\(i)") != nil {
+                enabled = defaults.valueForKey("\(Keys.alarmEnabled)\(i)") as! Bool
+            }
             
-            alarms.append(Alarm(days: days, time: time, repeat: repeat))
+            alarms.append(Alarm(days: days, time: time, repeat: repeat, enabled: enabled))
         }
         
         return alarms
     }
     
     func saveAlarms(alarms a: [Alarm]){
+        let defaults = NSUserDefaults.standardUserDefaults()
         
+        defaults.setValue(a.count, forKey: Keys.alarmCount)
+
+        for var i = 0; i < a.count; i++ {
+            defaults.setValue(a[i].days, forKey: "\(Keys.alarmDays)\(i)")
+            defaults.setValue(a[i].time, forKey: "\(Keys.alarmTime)\(i)")
+            defaults.setValue(a[i].repeat, forKey: "\(Keys.alarmRepeat)\(i)")
+            defaults.setValue(a[i].enabled, forKey: "\(Keys.alarmEnabled)\(i)")
+        }
+        
+        defaults.synchronize()
     }
 }
 
@@ -81,6 +104,10 @@ class SettingsContainer {
     var snoozeInterval: Int
     var weatherZip: String
     
+    convenience init(){
+        self.init(twentyFourHour: false, snoozeInterval: 9, weatherZip: "49428")
+    }
+    
     init(twentyFourHour: Bool, snoozeInterval: Int, weatherZip: String){
         self.twentyFourHour = twentyFourHour
         self.snoozeInterval = snoozeInterval
@@ -88,22 +115,17 @@ class SettingsContainer {
     }
 }
 
-class DataContainer {
-    var alarms: [Alarm] = []
-    init (alarms a: [Alarm]){
-        self.alarms = a
-    }
-}
-
 class Alarm {
     var days: [Int]
     var time: NSDate
     var repeat: Bool
+    var enabled: Bool
     
-    init (days: [Int], time: NSDate, repeat: Bool) {
+    init (days: [Int], time: NSDate, repeat: Bool, enabled: Bool) {
         self.days = days
         self.time = time
         self.repeat = repeat
+        self.enabled = enabled
     }
 }
 
@@ -116,4 +138,5 @@ struct Keys {
     static let alarmDays = "alarmDays_"
     static let alarmTime = "alarmTime_"
     static let alarmRepeat = "alarmRepeat_"
+    static let alarmEnabled = "alarmEnabled_"
 }
