@@ -8,11 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		33461D5D1B5FC8B0007B122E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D5C1B5FC8B0007B122E /* AppDelegate.swift */; };
-		33461D5F1B5FC8B0007B122E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D5E1B5FC8B0007B122E /* ViewController.swift */; };
+		33461D5F1B5FC8B0007B122E /* AlarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D5E1B5FC8B0007B122E /* AlarmTableViewController.swift */; };
 		33461D621B5FC8B0007B122E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33461D601B5FC8B0007B122E /* Main.storyboard */; };
 		33461D641B5FC8B0007B122E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33461D631B5FC8B0007B122E /* Images.xcassets */; };
 		33461D671B5FC8B0007B122E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33461D651B5FC8B0007B122E /* LaunchScreen.xib */; };
 		33461D731B5FC8B0007B122E /* AlarmDJTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D721B5FC8B0007B122E /* AlarmDJTests.swift */; };
+		33461D7D1B5FD783007B122E /* AlarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D7C1B5FD783007B122E /* AlarmCell.swift */; };
+		33461D7F1B5FDA83007B122E /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D7E1B5FDA83007B122E /* SettingsTableViewController.swift */; };
+		33461D811B5FDBC2007B122E /* AlarmSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D801B5FDBC2007B122E /* AlarmSettingsViewController.swift */; };
+		33461D831B5FDD22007B122E /* AlarmAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D821B5FDD22007B122E /* AlarmAlertViewController.swift */; };
+		33461D851B5FDF58007B122E /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D841B5FDF58007B122E /* SettingsManager.swift */; };
+		33461D871B5FEEA0007B122E /* DashboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D861B5FEEA0007B122E /* DashboardTableViewController.swift */; };
+		33461D891B5FEEDB007B122E /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D881B5FEEDB007B122E /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +36,20 @@
 		33461D571B5FC8B0007B122E /* AlarmDJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmDJ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33461D5B1B5FC8B0007B122E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33461D5C1B5FC8B0007B122E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		33461D5E1B5FC8B0007B122E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		33461D5E1B5FC8B0007B122E /* AlarmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewController.swift; sourceTree = "<group>"; };
 		33461D611B5FC8B0007B122E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33461D631B5FC8B0007B122E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		33461D661B5FC8B0007B122E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		33461D6C1B5FC8B0007B122E /* AlarmDJTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlarmDJTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33461D711B5FC8B0007B122E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33461D721B5FC8B0007B122E /* AlarmDJTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDJTests.swift; sourceTree = "<group>"; };
+		33461D7C1B5FD783007B122E /* AlarmCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmCell.swift; sourceTree = "<group>"; };
+		33461D7E1B5FDA83007B122E /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		33461D801B5FDBC2007B122E /* AlarmSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmSettingsViewController.swift; sourceTree = "<group>"; };
+		33461D821B5FDD22007B122E /* AlarmAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmAlertViewController.swift; sourceTree = "<group>"; };
+		33461D841B5FDF58007B122E /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		33461D861B5FEEA0007B122E /* DashboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTableViewController.swift; sourceTree = "<group>"; };
+		33461D881B5FEEDB007B122E /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +92,18 @@
 			isa = PBXGroup;
 			children = (
 				33461D5C1B5FC8B0007B122E /* AppDelegate.swift */,
-				33461D5E1B5FC8B0007B122E /* ViewController.swift */,
+				33461D5E1B5FC8B0007B122E /* AlarmTableViewController.swift */,
+				33461D7C1B5FD783007B122E /* AlarmCell.swift */,
+				33461D801B5FDBC2007B122E /* AlarmSettingsViewController.swift */,
+				33461D7E1B5FDA83007B122E /* SettingsTableViewController.swift */,
+				33461D861B5FEEA0007B122E /* DashboardTableViewController.swift */,
 				33461D601B5FC8B0007B122E /* Main.storyboard */,
+				33461D821B5FDD22007B122E /* AlarmAlertViewController.swift */,
 				33461D631B5FC8B0007B122E /* Images.xcassets */,
 				33461D651B5FC8B0007B122E /* LaunchScreen.xib */,
 				33461D5A1B5FC8B0007B122E /* Supporting Files */,
+				33461D841B5FDF58007B122E /* SettingsManager.swift */,
+				33461D881B5FEEDB007B122E /* WebViewController.swift */,
 			);
 			path = AlarmDJ;
 			sourceTree = "<group>";
@@ -212,8 +233,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33461D5F1B5FC8B0007B122E /* ViewController.swift in Sources */,
+				33461D811B5FDBC2007B122E /* AlarmSettingsViewController.swift in Sources */,
+				33461D891B5FEEDB007B122E /* WebViewController.swift in Sources */,
+				33461D851B5FDF58007B122E /* SettingsManager.swift in Sources */,
+				33461D7F1B5FDA83007B122E /* SettingsTableViewController.swift in Sources */,
+				33461D5F1B5FC8B0007B122E /* AlarmTableViewController.swift in Sources */,
+				33461D871B5FEEA0007B122E /* DashboardTableViewController.swift in Sources */,
+				33461D831B5FDD22007B122E /* AlarmAlertViewController.swift in Sources */,
 				33461D5D1B5FC8B0007B122E /* AppDelegate.swift in Sources */,
+				33461D7D1B5FD783007B122E /* AlarmCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +437,7 @@
 				33461D781B5FC8B0007B122E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		33461D791B5FC8B0007B122E /* Build configuration list for PBXNativeTarget "AlarmDJTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +446,7 @@
 				33461D7B1B5FC8B0007B122E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

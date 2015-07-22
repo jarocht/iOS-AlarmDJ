@@ -8,10 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class AlarmTableViewController: UITableViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        var settings = SettingsManager().loadSettings()
+        
+        println(settings.weatherZip)
+        
+        settings.weatherZip = "49426"
+        
+        SettingsManager().saveSettings(settingsContainer: settings)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -20,6 +28,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
 
 }
 
