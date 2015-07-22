@@ -10,6 +10,7 @@ import UIKit
 
 class AlarmTableViewController: UITableViewController {
     
+    @IBOutlet var alarmTableView: UITableView!
     var settings: SettingsContainer = SettingsContainer()
     var alarms: [Alarm] = []
     
@@ -27,6 +28,13 @@ class AlarmTableViewController: UITableViewController {
 
        alarms = ldm.loadAlarms()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        alarms = LocalDataManager().loadAlarms()
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+        })
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -41,17 +49,17 @@ class AlarmTableViewController: UITableViewController {
         var cell: AlarmCell = self.tableView.dequeueReusableCellWithIdentifier("AlarmCell") as! AlarmCell
         var alarm: Alarm = alarms[indexPath.row]
         
-
-        
         //cell.timeLabel.text! = alarm.time
         let comp = NSCalendar.currentCalendar().components((.CalendarUnitHour | .CalendarUnitMinute), fromDate: alarm.time)
         
         if settings.twentyFourHour {
-            cell.periodLabel.hidden = true
+            cell.amLabel.hidden = true
+            cell.pmLabel.hidden = true
             cell.timeLabel.text! = "\(comp.hour):\(comp.minute)"
         } else {
             var time = comp.hour.toIntMax()
-            cell.periodLabel.text! = time >= 12 ? "PM" : "AM"
+            cell.amLabel.hidden = time >= 12
+            cell.pmLabel.hidden = !cell.amLabel.hidden
             
             if time > 12{
                 time = time - 12
@@ -95,6 +103,8 @@ class AlarmTableViewController: UITableViewController {
         } else if segue.identifier == "ExistingAlarmSegue" {
             let index = self.tableView.indexPathForSelectedRow()!.row
             view.date = alarms[index].time
+            view.days = alarms[index].days
+            view.alarmIndex = index
         }
     }
 }

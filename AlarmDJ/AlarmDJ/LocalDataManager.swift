@@ -85,7 +85,7 @@ class LocalDataManager {
     
     func saveAlarms(alarms a: [Alarm]){
         let defaults = NSUserDefaults.standardUserDefaults()
-        
+        println("saving \(a.count) alarms")
         defaults.setValue(a.count, forKey: Keys.alarmCount)
 
         for var i = 0; i < a.count; i++ {
