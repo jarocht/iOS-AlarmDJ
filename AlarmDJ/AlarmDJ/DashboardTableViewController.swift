@@ -8,11 +8,15 @@
 import UIKit
 import Foundation
 import EventKit
+import AVFoundation
+import MediaPlayer
 
 class DashboardTableViewController: UITableViewController {
 
     // set up local data manager for settings
     var ldm = LocalDataManager()
+    // set up speech synthesizer
+    let synthesizer = AVSpeechSynthesizer()
     // news data
     var news = [String]()
     var newsLoaded: Bool = false
@@ -43,16 +47,12 @@ class DashboardTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    
+        
         // set up settings
         var settings = ldm.loadSettings()
+        
         // set time
         setTime(settings.twentyFourHour)
-        
-        var refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "updateData", forControlEvents: UIControlEvents.ValueChanged)
-        self.refreshControl = refreshControl
         
         self.getNewsGoogle("Apple", completionHandler: {
             results in
@@ -96,6 +96,40 @@ class DashboardTableViewController: UITableViewController {
         
         // load calendar info into view
         self.loadCalendar()
+        
+        // start synthesizing speech
+        // speak greeting
+        var speech = "Hello there! It's time to wake up!"
+        var utterance = self.createUtterance(speech)
+        synthesizer.speakUtterance(utterance)
+        // speak news
+
+        // speak calendar event
+        if self.events["title"]! != "There are no Events" {
+            var dateString = self.events["start"]!
+            var formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd 'at' h:mm a"
+            var date = formatter.dateFromString(dateString)
+            formatter.dateFormat = "hh:mm"
+            var timeString = formatter.stringFromDate(date!)
+            speech = "Your first appointment in your calendar is " + self.events["title"]! + " at " + timeString
+            synthesizer.speakUtterance(self.createUtterance(speech))
+        }
+        
+        // play music
+        //PLAY BY GENRE
+        let genre:String = settings.musicGenre
+        var query = MPMediaQuery.songsQuery()
+        let predicateByGenre = MPMediaPropertyPredicate(value: genre, forProperty: MPMediaItemPropertyGenre)
+        query.filterPredicates = NSSet(object: predicateByGenre) as Set<NSObject>
+        
+        let mediaCollection = MPMediaItemCollection(items: query.items)
+        
+        let player = MPMusicPlayerController.iPodMusicPlayer()
+        player.setQueueWithItemCollection(mediaCollection)
+        
+        player.play()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -142,28 +176,17 @@ class DashboardTableViewController: UITableViewController {
     // Function used in the refresh control to update all of the data
     func updateData() {
         var settings = self.ldm.loadSettings()
+        
         // update weather data
         self.loadWeather(self.desc, image: self.image, city: self.city, currTemp: self.currTemp, minTemp: self.minTemp, maxTemp: self.maxTemp)
         
         // update news data
         self.loadNews()
-//        self.titleLabel1!.text = self.news[0]
-//        self.subtitleLabel1!.text = self.news[1]
-//        self.titleLabel2!.text = self.news[3]
-//        self.subtitleLabel2!.text = self.news[4]
-//        self.titleLabel3!.text = self.news[6]
-//        self.subtitleLabel3!.text = self.news[7]
-//        self.titleLabel4!.text = self.news[9]
-//        self.subtitleLabel4!.text = self.news[10]
         
         // update calendar data
         self.loadCalendar()
         
         self.setTime(settings.twentyFourHour)
-
-        //self.tableView.reloadData()
-        //self.refreshControl?.endRefreshing()
-
     }
     
     /* Gives back an array of Title and Links to
@@ -183,7 +206,7 @@ class DashboardTableViewController: UITableViewController {
         let baseUrl = NSURL(string: "https://ajax.googleapis.com/ajax/services/search/news")!
         let url = NSURL(string: "?v=1.0" + queryParams, relativeToURL:baseUrl)!
         
-        //creat session
+        //create session
         let session = NSURLSession.sharedSession()
         var parseError : NSError?
         
@@ -217,6 +240,14 @@ class DashboardTableViewController: UITableViewController {
             completionHandler(results: resultsArray)
             self.news = resultsArray as [String]
             self.newsLoaded = true
+            // sythesizing speech for news
+            var speech = "Here are the news headlines for today."
+            self.synthesizer.speakUtterance(self.createUtterance(speech))
+            for var i = 0; i < 4; i++ {
+                speech = self.news[i*3]
+                self.synthesizer.speakUtterance(self.createUtterance(speech))
+            }
+
         }
         task.resume()
     }
@@ -238,14 +269,16 @@ class DashboardTableViewController: UITableViewController {
     }
     
     func loadNews() {
-        self.titleLabel1!.text = self.news[0]
-        self.subtitleLabel1!.text = self.news[1]
-        self.titleLabel2!.text = self.news[3]
-        self.subtitleLabel2!.text = self.news[4]
-        self.titleLabel3!.text = self.news[6]
-        self.subtitleLabel3!.text = self.news[7]
-        self.titleLabel4!.text = self.news[9]
-        self.subtitleLabel4!.text = self.news[10]
+        if self.newsLoaded {
+            self.titleLabel1!.text = self.news[0]
+            self.subtitleLabel1!.text = self.news[1]
+            self.titleLabel2!.text = self.news[3]
+            self.subtitleLabel2!.text = self.news[4]
+            self.titleLabel3!.text = self.news[6]
+            self.subtitleLabel3!.text = self.news[7]
+            self.titleLabel4!.text = self.news[9]
+            self.subtitleLabel4!.text = self.news[10]
+        }
     }
     
     func getWeather(zip: String) -> () {
@@ -277,10 +310,13 @@ class DashboardTableViewController: UITableViewController {
                 self.city = topLevelObj["name"] as! String
             }
             self.loadWeather(self.desc, image: self.image, city: self.city, currTemp: self.currTemp, minTemp: self.minTemp, maxTemp: self.maxTemp)
+            // synthesizing speech for weather
+            var speech = "Here is the current weather for \(self.city)"
+            self.synthesizer.speakUtterance(self.createUtterance(speech))
+            speech = "\(self.desc). The current temperature is \(self.currTemp) degrees Fahrenheit. The high for today is \(self.maxTemp)"
+            self.synthesizer.speakUtterance(self.createUtterance(speech))
         }
         task.resume()
-
-
     }
     
     func loadWeather(weatherDesc: String, image: String, city: String, currTemp: Int, minTemp: Int, maxTemp: Int) {
@@ -341,5 +377,11 @@ class DashboardTableViewController: UITableViewController {
             dateFormatter.setLocalizedDateFormatFromTemplate("hh:mm")
         }
         self.timeLabel!.text = dateFormatter.stringFromDate(time)
+    }
+    
+    func createUtterance(speech: String) -> AVSpeechUtterance {
+        var speechString = AVSpeechUtterance(string: speech)
+        speechString.rate = 0.15
+        return speechString
     }
 }
