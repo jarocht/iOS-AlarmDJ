@@ -11,6 +11,24 @@ import Foundation
 class DashboardTableViewController: UITableViewController {
     
     var news = [String]()
+    // Weather cell
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var ampmLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var weatherDescLabel: UILabel!
+    @IBOutlet weak var currTempLabel: UILabel!
+    @IBOutlet weak var minTempLabel: UILabel!
+    @IBOutlet weak var maxTempLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    // News cells
+    @IBOutlet weak var titleLabel1: UILabel!
+    @IBOutlet weak var subtitleLabel1: UILabel!
+    @IBOutlet weak var titleLabel2: UILabel!
+    @IBOutlet weak var subtitleLabel2: UILabel!
+    @IBOutlet weak var titleLabel3: UILabel!
+    @IBOutlet weak var subtitleLabel3: UILabel!
+    @IBOutlet weak var titleLabel4: UILabel!
+    @IBOutlet weak var subtitleLabel4: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,9 +36,14 @@ class DashboardTableViewController: UITableViewController {
         
         self.getNewsGoogle("Apple", completionHandler: {
             results in
-            println("data: \(results)")
             self.news = results as! [(String)]
+            self.loadNews()
         })
+        
+        // get zip code from settings
+        var zipcode = "49401"
+        self.getWeather(zipcode)
+        
         
     }
     
@@ -29,38 +52,8 @@ class DashboardTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 1
-    }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 6
-    }
-    
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WeatherCell", forIndexPath: indexPath) as! NewsTableViewCell
-        
-        let title = news[(indexPath.row * 3)+1]
-        let subtitle = news[(indexPath.row * 3)+2]
-        let link = news[(indexPath.row * 3)+3]
-        
-        cell.headlineLabel!.text = title
-        cell.descLabel!.text = subtitle
-
-        return cell
-    }
-    
-    
     // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
@@ -116,6 +109,7 @@ class DashboardTableViewController: UITableViewController {
                 }
             }
             completionHandler(results: resultsArray)
+            self.news = resultsArray as [String]
         }
         task.resume()
     }
@@ -136,8 +130,61 @@ class DashboardTableViewController: UITableViewController {
         return decodedString
     }
     
-//    func readWeather(url: String) -> () {
-//        
-//    }
+    func loadNews() {
+        self.titleLabel1!.text = self.news[0]
+        self.subtitleLabel1!.text = self.news[1]
+        self.titleLabel2!.text = self.news[3]
+        self.subtitleLabel2!.text = self.news[4]
+        self.titleLabel3!.text = self.news[6]
+        self.subtitleLabel3!.text = self.news[7]
+        self.titleLabel4!.text = self.news[9]
+        self.subtitleLabel4!.text = self.news[10]
+    }
+    
+    func getWeather(zip: String) -> () {
+        let weatherUrl = NSURL(string: "http://api.openweathermap.org/data/2.5/weather?zip=\(zip),us&units=imperial")
+        let session = NSURLSession.sharedSession()
+        var parseError : NSError?
+        
+        let task = session.downloadTaskWithURL(weatherUrl!) {
+            (loc: NSURL!, response: NSURLResponse!, error: NSError!) in
+            let data = NSData(contentsOfURL: loc)!
+            let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parseError)
+            
+            // variables for weather cell items
+            var desc = "", image = "", city = "", currTemp = 0, minTemp = 0, maxTemp = 0
+            // parsing the JSON file
+            if let topLevelObj = parsedObject as? NSDictionary {
+                // Get weather description
+                if let weather = topLevelObj.objectForKey("weather") as? NSArray {
+                    if let w = weather[0] as? NSDictionary {
+                        desc = w["description"] as! String
+                        image = w["icon"] as! String
+                    }
+                }
+                // Get temperatures
+                if let main = topLevelObj.objectForKey("main") as? NSDictionary {
+                    currTemp = main["temp"] as! Int
+                    maxTemp = main["temp_max"] as! Int
+                    minTemp = main["temp_min"] as! Int
+                }
+                // Get city name
+                city = topLevelObj["name"] as! String
+            }
+            self.loadWeather(desc, image: image, city: city, currTemp: currTemp, minTemp: minTemp, maxTemp: maxTemp)
+        }
+        task.resume()
+
+
+    }
+    
+    func loadWeather(weatherDesc: String, image: String, city: String, currTemp: Int, minTemp: Int, maxTemp: Int) {
+        self.weatherDescLabel!.text = weatherDesc
+        self.cityLabel!.text = city
+        self.currTempLabel!.text = "\(currTemp)"
+        self.minTempLabel!.text = "Low: \(minTemp)"
+        self.maxTempLabel!.text = "High: \(maxTemp)"
+        self.imageView?.image = UIImage(named: image)
+    }
     
 }
