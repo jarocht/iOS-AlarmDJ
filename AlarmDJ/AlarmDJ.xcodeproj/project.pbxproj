@@ -22,6 +22,7 @@
 		33461D891B5FEEDB007B122E /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D881B5FEEDB007B122E /* WebViewController.swift */; };
 		33461D8B1B5FF4B9007B122E /* MusicSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D8A1B5FF4B9007B122E /* MusicSelectorViewController.swift */; };
 		33461D8D1B5FF4F3007B122E /* NewsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D8C1B5FF4F3007B122E /* NewsSettingsViewController.swift */; };
+		33461D8F1B6117B1007B122E /* RingtoneSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33461D8E1B6117B1007B122E /* RingtoneSelectorViewController.swift */; };
 		3379E34E1B601DB800D36489 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379E34D1B601DB800D36489 /* WeatherTableViewCell.swift */; };
 		3379E3501B601DD100D36489 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379E34F1B601DD100D36489 /* NewsTableViewCell.swift */; };
 		3379E3521B601DDB00D36489 /* MoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379E3511B601DDB00D36489 /* MoreTableViewCell.swift */; };
@@ -57,6 +58,7 @@
 		33461D881B5FEEDB007B122E /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		33461D8A1B5FF4B9007B122E /* MusicSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicSelectorViewController.swift; sourceTree = "<group>"; };
 		33461D8C1B5FF4F3007B122E /* NewsSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsSettingsViewController.swift; sourceTree = "<group>"; };
+		33461D8E1B6117B1007B122E /* RingtoneSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingtoneSelectorViewController.swift; sourceTree = "<group>"; };
 		3379E34D1B601DB800D36489 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
 		3379E34F1B601DD100D36489 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		3379E3511B601DDB00D36489 /* MoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewCell.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				33461D881B5FEEDB007B122E /* WebViewController.swift */,
 				33461D8A1B5FF4B9007B122E /* MusicSelectorViewController.swift */,
 				33461D8C1B5FF4F3007B122E /* NewsSettingsViewController.swift */,
+				33461D8E1B6117B1007B122E /* RingtoneSelectorViewController.swift */,
 			);
 			path = AlarmDJ;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			files = (
 				3379E34E1B601DB800D36489 /* WeatherTableViewCell.swift in Sources */,
 				33461D811B5FDBC2007B122E /* AlarmSettingsViewController.swift in Sources */,
+				33461D8F1B6117B1007B122E /* RingtoneSelectorViewController.swift in Sources */,
 				33461D891B5FEEDB007B122E /* WebViewController.swift in Sources */,
 				33461D851B5FDF58007B122E /* LocalDataManager.swift in Sources */,
 				3379E3521B601DDB00D36489 /* MoreTableViewCell.swift in Sources */,

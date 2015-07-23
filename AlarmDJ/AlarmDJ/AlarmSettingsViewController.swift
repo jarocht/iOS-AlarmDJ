@@ -45,6 +45,14 @@ class AlarmSettingsViewController: UITableViewController, UITextFieldDelegate {
         repeatEnabledBtn.on = alarm.repeat
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "SelectAlarmRingtone" {
+            var view = segue.destinationViewController as! RingtoneSelectorViewController
+            view.alarm = self.alarm
+            view.alarmIndex = self.alarmIndex
+        }
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false

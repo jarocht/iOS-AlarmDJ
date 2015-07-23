@@ -300,6 +300,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="LcJ-up-0ar" kind="show" identifier="SelectAlarmRingtone" id="Rkz-rh-uXa"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="RXJ-S4-51r">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -410,6 +413,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="43g-oa-HQY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1115.5" y="497.5"/>
+        </scene>
+        <!--Select-->
+        <scene sceneID="5m2-X1-3NS">
+            <objects>
+                <viewController id="LcJ-up-0ar" customClass="RingtoneSelectorViewController" customModule="AlarmDJ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Icz-s6-BFs"/>
+                        <viewControllerLayoutGuide type="bottom" id="Phd-ou-KaY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oRh-kC-vfZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H8x-zx-8Y9">
+                                <rect key="frame" x="0.0" y="64" width="375" height="162"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Select" id="xyP-ne-Pc0">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="pen-3a-VOq">
+                            <connections>
+                                <action selector="saveBtnClicked:" destination="LcJ-up-0ar" id="Gtb-oC-NaP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="pickerView" destination="H8x-zx-8Y9" id="PKg-DR-6HD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dPz-lE-Vtf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1717.5" y="497.5"/>
         </scene>
         <!--Alarms-->
         <scene sceneID="Dfg-HJ-RSC">
