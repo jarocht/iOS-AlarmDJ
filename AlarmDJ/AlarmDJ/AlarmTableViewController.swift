@@ -175,6 +175,7 @@ class AlarmTableViewController: UITableViewController {
     func fireTimer(timer: NSTimer) {
         var info = timer.userInfo as! Dictionary<String, AnyObject>
         var alarm = info["alarm"] as! Alarm
+        timer.invalidate()
         self.performSegueWithIdentifier("AlarmAlertSegue", sender: alarm)
     }
 }
