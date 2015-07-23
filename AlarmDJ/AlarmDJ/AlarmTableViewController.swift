@@ -22,15 +22,14 @@ class AlarmTableViewController: UITableViewController {
         //settings.weatherZip = "49426"
         //ldm.saveSettings(settingsContainer: settings)
         
-        var alarm = Alarm(days: [0,0,0,0,0,0,0], time: NSDate(), title: "title 1", repeat: false, enabled: true)
-        var alarm2 = Alarm(days: [1,1,1,1,1,1,1], time: NSDate(), title: "title 2", repeat: false, enabled: false)
-        ldm.saveAlarms(alarms: [alarm, alarm2])
+        var alarm = Alarm(days: [0,0,0,0,0,0,0], time: NSDate(), title: "title 1", snooze: true, repeat: false, enabled: true, ringtoneId: 1034)
+        var alarm2 = Alarm(days: [1,1,1,1,1,1,1], time: NSDate(), title: "title 2", snooze: true, repeat: false, enabled: false, ringtoneId: 1034)
+        //ldm.saveAlarms(alarms: [alarm, alarm2])
 
        alarms = ldm.loadAlarms()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        alarms = LocalDataManager().loadAlarms()
+    override func viewWillAppear(animated: Bool) {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
         })
@@ -46,6 +45,7 @@ class AlarmTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        alarms = LocalDataManager().loadAlarms()
         var cell: AlarmCell = self.tableView.dequeueReusableCellWithIdentifier("AlarmCell") as! AlarmCell
         var alarm: Alarm = alarms[indexPath.row]
         
@@ -55,45 +55,47 @@ class AlarmTableViewController: UITableViewController {
         if settings.twentyFourHour {
             cell.amLabel.hidden = true
             cell.pmLabel.hidden = true
-            cell.timeLabel.text! = "\(comp.hour):\(comp.minute)"
+            var time = parseTime(comp.hour, min: comp.minute)
+            cell.timeLabel.text! = "\(time.hour):\(time.min)"
         } else {
-            var time = comp.hour.toIntMax()
-            cell.amLabel.hidden = time >= 12
+            var hourTime: Int = ("\(comp.hour)").toInt()!
+            cell.amLabel.hidden = hourTime >= 12
             cell.pmLabel.hidden = !cell.amLabel.hidden
             
-            if time > 12{
-                time = time - 12
+            if hourTime > 12{
+                hourTime = hourTime - 12
             }
+            var time = parseTime(hourTime, min: comp.minute)
             
-            cell.timeLabel.text! = "\(time):\(comp.minute)"
+            cell.timeLabel.text! = "\(time.hour):\(time.min)"
         }
         
-        if alarm.days[0] == 1 {
-            cell.sundayLabel.textColor = UIColor.greenColor()
-        }
-        if alarm.days[1] == 1 {
-            cell.mondayLabel.textColor = UIColor.greenColor()
-        }
-        if alarm.days[2] == 1 {
-            cell.tuesdayLabel.textColor = UIColor.greenColor()
-        }
-        if alarm.days[3] == 1 {
-            cell.wednesdayLabel.textColor = UIColor.greenColor()
-        }
-        if alarm.days[4] == 1 {
-            cell.thursdayLabel.textColor = UIColor.greenColor()
-        }
-        if alarm.days[5] == 1 {
-            cell.fridayLabel.textColor = UIColor.greenColor()
-        }
-        if alarm.days[6] == 1 {
-            cell.saturdayLabel.textColor = UIColor.greenColor()
-        }
+        cell.sundayLabel.textColor = alarm.days[0] == 1 ? UIColor.greenColor() : UIColor.blackColor()
+        cell.mondayLabel.textColor = alarm.days[1] == 1 ? UIColor.greenColor() : UIColor.blackColor()
+        cell.tuesdayLabel.textColor = alarm.days[2] == 1 ? UIColor.greenColor() : UIColor.blackColor()
+        cell.wednesdayLabel.textColor = alarm.days[3] == 1 ? UIColor.greenColor() : UIColor.blackColor()
+        cell.thursdayLabel.textColor = alarm.days[4] == 1 ? UIColor.greenColor() : UIColor.blackColor()
+        cell.fridayLabel.textColor = alarm.days[5] == 1 ? UIColor.greenColor() : UIColor.blackColor()
+        cell.saturdayLabel.textColor = alarm.days[6] == 1 ? UIColor.greenColor() : UIColor.blackColor()
         
         cell.titleLabel.text! = alarm.title
         cell.activeSwitch.on = alarm.enabled
         
         return cell
+    }
+    
+    func parseTime(hour: Int, min: Int) -> (hour: String, min: String){
+        var min: String = "\(min)"
+        if count(min) < 2 {
+            min = "0\(min)"
+        }
+        
+        var hour: String = "\(hour)"
+        if count(hour) < 2 {
+            hour = "0\(hour)"
+        }
+        
+        return (hour, min)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -102,9 +104,7 @@ class AlarmTableViewController: UITableViewController {
         } else if segue.identifier == "ExistingAlarmSegue" {
             let view = segue.destinationViewController as! AlarmSettingsViewController
             let index = self.tableView.indexPathForSelectedRow()!.row
-            view.date = alarms[index].time
-            view.days = alarms[index].days
-            view.titleText = alarms[index].title
+            view.alarm = alarms[index]
             view.alarmIndex = index
         }
     }

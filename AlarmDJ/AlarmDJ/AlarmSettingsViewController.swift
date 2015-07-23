@@ -10,7 +10,6 @@ import UIKit
 
 class AlarmSettingsViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var datePicker: UIDatePicker!
-    var date: NSDate = NSDate()
     
     @IBOutlet weak var sundayBtn: UIButton!
     @IBOutlet weak var mondayBtn: UIButton!
@@ -20,29 +19,30 @@ class AlarmSettingsViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var fridayBtn: UIButton!
     @IBOutlet weak var saturdayBtn: UIButton!
     @IBOutlet weak var titleTextField: UITextField!
-    var titleText: String = ""
     @IBOutlet weak var snoozeEnabledBtn: UISwitch!
     @IBOutlet weak var repeatEnabledBtn: UISwitch!
     @IBOutlet weak var deleteAlarmBtn: UIButton!
     
-    var days: [Int] = [0,0,0,0,0,0,0]
     var alarmIndex: Int = -1
+    var alarm: Alarm = Alarm()
     
     override func viewDidLoad() {
         self.titleTextField.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
-        datePicker.setDate(date, animated: true)
-        titleTextField.text! = titleText
-        sundayBtn.selected = days[0] == 1
-        mondayBtn.selected = days[1] == 1
-        tuesdayBtn.selected = days[2] == 1
-        wednesdayBtn.selected = days[3] == 1
-        thursdayBtn.selected = days[4] == 1
-        fridayBtn.selected = days[5] == 1
-        saturdayBtn.selected = days[6] == 1
+        datePicker.setDate(self.alarm.time, animated: true)
+        titleTextField.text! = self.alarm.title
+        sundayBtn.selected = alarm.days[0] == 1
+        mondayBtn.selected = alarm.days[1] == 1
+        tuesdayBtn.selected = alarm.days[2] == 1
+        wednesdayBtn.selected = alarm.days[3] == 1
+        thursdayBtn.selected = alarm.days[4] == 1
+        fridayBtn.selected = alarm.days[5] == 1
+        saturdayBtn.selected = alarm.days[6] == 1
         deleteAlarmBtn.hidden = alarmIndex == -1
+        snoozeEnabledBtn.on = alarm.snooze
+        repeatEnabledBtn.on = alarm.repeat
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -55,7 +55,7 @@ class AlarmSettingsViewController: UITableViewController, UITextFieldDelegate {
         var ldm = LocalDataManager()
         var alarms = ldm.loadAlarms()
         
-        var alarm = Alarm(days: days, time: datePicker.date, title: titleTextField.text!, repeat: snoozeEnabledBtn.on, enabled: true)
+        var alarm = Alarm(days: self.alarm.days, time: datePicker.date, title: titleTextField.text!, snooze: snoozeEnabledBtn.on, repeat: snoozeEnabledBtn.on, enabled: self.alarm.enabled, ringtoneId: self.alarm.ringtoneId)
         
         if (alarmIndex < 0){
             alarms.append(alarm)
@@ -68,38 +68,38 @@ class AlarmSettingsViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func sundayBtnClicked(sender: AnyObject) {
-        days[0] = sundayBtn.selected ? 0 : 1
-        sundayBtn.selected = days[0] == 1
+        alarm.days[0] = sundayBtn.selected ? 0 : 1
+        sundayBtn.selected = alarm.days[0] == 1
     }
    
     @IBAction func mondayBtnClicked(sender: AnyObject) {
-        days[1] = mondayBtn.selected ? 0 : 1
-        mondayBtn.selected = days[1] == 1
+        alarm.days[1] = mondayBtn.selected ? 0 : 1
+        mondayBtn.selected = alarm.days[1] == 1
     }
     
     @IBAction func tuesdayBtnClicked(sender: AnyObject) {
-        days[2] = tuesdayBtn.selected ? 0 : 1
-        tuesdayBtn.selected = days[2] == 1
+        alarm.days[2] = tuesdayBtn.selected ? 0 : 1
+        tuesdayBtn.selected = alarm.days[2] == 1
     }
     
     @IBAction func wednesdayBtnClicked(sender: AnyObject) {
-        days[3] = wednesdayBtn.selected ? 0 : 1
-        wednesdayBtn.selected = days[3] == 1
+        alarm.days[3] = wednesdayBtn.selected ? 0 : 1
+        wednesdayBtn.selected = alarm.days[3] == 1
     }
     
     @IBAction func thursdayBtnClicked(sender: AnyObject) {
-        days[4] = thursdayBtn.selected ? 0 : 1
-        thursdayBtn.selected = days[4] == 1
+        alarm.days[4] = thursdayBtn.selected ? 0 : 1
+        thursdayBtn.selected = alarm.days[4] == 1
     }
     
     @IBAction func fridayBtnClicked(sender: AnyObject) {
-        days[5] = fridayBtn.selected ? 0 : 1
-        fridayBtn.selected = days[5] == 1
+        alarm.days[5] = fridayBtn.selected ? 0 : 1
+        fridayBtn.selected = alarm.days[5] == 1
     }
     
     @IBAction func saturdayBtnClicked(sender: AnyObject) {
-        days[6] = saturdayBtn.selected ? 0 : 1
-        saturdayBtn.selected = days[6] == 1
+        alarm.days[6] = saturdayBtn.selected ? 0 : 1
+        saturdayBtn.selected = alarm.days[6] == 1
     }
     @IBAction func deleteAlarmBtnClicked(sender: AnyObject) {
         var ldm = LocalDataManager()

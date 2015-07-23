@@ -62,8 +62,10 @@ class LocalDataManager {
             var days: [Int] = [0,0,0,0,0,0,0]
             var time: NSDate = NSDate()
             var title: String = ""
+            var snooze: Bool = false
             var repeat: Bool = false
             var enabled: Bool = true
+            var ringtoneId: Int = 1304
             
             if defaults.valueForKey("\(Keys.alarmDays)\(i)") != nil {
                 days = defaults.valueForKey("\(Keys.alarmDays)\(i)") as! [Int]
@@ -74,14 +76,20 @@ class LocalDataManager {
             if defaults.valueForKey("\(Keys.alarmTitle)\(i)") != nil {
                 title = defaults.valueForKey("\(Keys.alarmTitle)\(i)") as! String
             }
+            if defaults.valueForKey("\(Keys.alarmSnooze)\(i)") != nil {
+                snooze = defaults.valueForKey("\(Keys.alarmSnooze)\(i)") as! Bool
+            }
             if defaults.valueForKey("\(Keys.alarmRepeat)\(i)") != nil {
                 repeat = defaults.valueForKey("\(Keys.alarmRepeat)\(i)") as! Bool
             }
             if defaults.valueForKey("\(Keys.alarmEnabled)\(i)") != nil {
                 enabled = defaults.valueForKey("\(Keys.alarmEnabled)\(i)") as! Bool
             }
+            if defaults.valueForKey("\(Keys.alarmRingtoneId)\(i)") != nil {
+                ringtoneId = defaults.valueForKey("\(Keys.alarmRingtoneId)\(i)") as! Int
+            }
             
-            alarms.append(Alarm(days: days, time: time, title: title, repeat: repeat, enabled: enabled))
+            alarms.append(Alarm(days: days, time: time, title: title, snooze: snooze, repeat: repeat, enabled: enabled, ringtoneId: ringtoneId))
         }
         
         return alarms
@@ -96,8 +104,10 @@ class LocalDataManager {
             defaults.setValue(a[i].days, forKey: "\(Keys.alarmDays)\(i)")
             defaults.setValue(a[i].time, forKey: "\(Keys.alarmTime)\(i)")
             defaults.setValue(a[i].title, forKey: "\(Keys.alarmTitle)\(i)")
+            defaults.setValue(a[i].snooze, forKey: "\(Keys.alarmSnooze)\(i)")
             defaults.setValue(a[i].repeat, forKey: "\(Keys.alarmRepeat)\(i)")
             defaults.setValue(a[i].enabled, forKey: "\(Keys.alarmEnabled)\(i)")
+            defaults.setValue(a[i].ringtoneId, forKey: "\(Keys.alarmRingtoneId)\(i)")
         }
         
         defaults.synchronize()
@@ -124,18 +134,25 @@ class Alarm {
     var days: [Int]
     var time: NSDate
     var title: String
+    var snooze: Bool
     var repeat: Bool
     var enabled: Bool
+    var ringtoneId: Int
     
-    init (days: [Int], time: NSDate, title: String, repeat: Bool, enabled: Bool) {
+    convenience init(){
+        self.init(days: [0,0,0,0,0,0,0], time: NSDate(), title: "", snooze: true, repeat: true, enabled: true, ringtoneId: 1034)
+    }
+    
+    init (days: [Int], time: NSDate, title: String, snooze: Bool, repeat: Bool, enabled: Bool, ringtoneId: Int) {
         self.days = days
         self.time = time
         self.title = title
+        self.snooze = snooze
         self.repeat = repeat
         self.enabled = enabled
+        self.ringtoneId = ringtoneId
     }
 }
-
 
 struct Keys {
     static let twentyFourHour = "twentyFourHour"
@@ -145,6 +162,13 @@ struct Keys {
     static let alarmDays = "alarmDays_"
     static let alarmTime = "alarmTime_"
     static let alarmTitle = "alarmTitle_"
+    static let alarmSnooze = "alarmSnooze_"
     static let alarmRepeat = "alarmRepeat_"
     static let alarmEnabled = "alarmEnabled_"
+    static let alarmRingtoneId = "alarmRingtoneId_"
 }
+
+
+
+
+
