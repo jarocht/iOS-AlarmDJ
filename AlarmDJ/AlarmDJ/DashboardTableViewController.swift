@@ -9,8 +9,9 @@ import UIKit
 import Foundation
 
 class DashboardTableViewController: UITableViewController {
-    
+    //news titles, contents and URLs
     var news = [String]()
+    
     // Weather cell
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var ampmLabel: UILabel!
@@ -57,7 +58,23 @@ class DashboardTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-        
+
+        if segue.identifier == "news1" {
+            (segue.destinationViewController as? WebViewController)?.title = self.news[0]
+            (segue.destinationViewController as? WebViewController)?.webUrl = self.news[2]
+        } else if segue.identifier == "news2" {
+            (segue.destinationViewController as? WebViewController)?.title = self.news[3]
+            (segue.destinationViewController as? WebViewController)?.webUrl = self.news[5]
+        } else if segue.identifier == "news3" {
+            (segue.destinationViewController as? WebViewController)?.title = self.news[6]
+            (segue.destinationViewController as? WebViewController)?.webUrl = self.news[8]
+        } else if segue.identifier == "news4" {
+            (segue.destinationViewController as? WebViewController)?.title = self.news[9]
+            (segue.destinationViewController as? WebViewController)?.webUrl = self.news[11]
+        } else if segue.identifier == "newsMore" {
+            (segue.destinationViewController as? WebViewController)?.title = "More news"
+            (segue.destinationViewController as? WebViewController)?.webUrl = self.news[12]
+        }
     }
     
     /* Gives back an array of Title and Links to

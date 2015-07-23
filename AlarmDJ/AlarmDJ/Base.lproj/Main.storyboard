@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TCl-d4-mDn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TCl-d4-mDn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -812,6 +812,7 @@
                                         <connections>
                                             <outlet property="descLabel" destination="q8z-NN-Kjn" id="aa7-9G-Fzm"/>
                                             <outlet property="headlineLabel" destination="ubB-qB-UT0" id="DIG-NR-THJ"/>
+                                            <segue destination="Oad-9E-Hu2" kind="show" identifier="news1" id="UlL-V1-AzU"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NewsCell" rowHeight="68" id="HQU-iK-3w6" customClass="NewsTableViewCell" customModule="AlarmDJ" customModuleProvider="target">
@@ -851,6 +852,7 @@
                                         <connections>
                                             <outlet property="descLabel" destination="OqS-04-Qeg" id="whu-lD-oee"/>
                                             <outlet property="headlineLabel" destination="1Cd-6I-oOU" id="rq6-FO-lMm"/>
+                                            <segue destination="Oad-9E-Hu2" kind="show" identifier="news2" id="LGL-0N-GbM"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NewsCell" rowHeight="68" id="PUr-W9-BF7" customClass="NewsTableViewCell" customModule="AlarmDJ" customModuleProvider="target">
@@ -890,6 +892,7 @@
                                         <connections>
                                             <outlet property="descLabel" destination="bUC-lh-ENY" id="hLG-yc-vCT"/>
                                             <outlet property="headlineLabel" destination="YSz-NT-s7W" id="Qff-4A-3rE"/>
+                                            <segue destination="Oad-9E-Hu2" kind="show" identifier="news3" id="7D8-Pn-RsY"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NewsCell" rowHeight="68" id="bTb-E1-1bJ" customClass="NewsTableViewCell" customModule="AlarmDJ" customModuleProvider="target">
@@ -929,6 +932,7 @@
                                         <connections>
                                             <outlet property="descLabel" destination="AEX-ef-lok" id="olX-8e-Gw5"/>
                                             <outlet property="headlineLabel" destination="Qke-Kr-Eqh" id="785-8I-Re8"/>
+                                            <segue destination="Oad-9E-Hu2" kind="show" identifier="news4" id="p7P-Ft-ttO"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MoreCell" id="cBN-9b-Hkq">
@@ -953,7 +957,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Oad-9E-Hu2" kind="show" id="liM-GV-hTx"/>
+                                            <segue destination="Oad-9E-Hu2" kind="show" identifier="newsMore" id="liM-GV-hTx"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -989,10 +993,10 @@
             </objects>
             <point key="canvasLocation" x="1115.5" y="1287.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Web View Controller-->
         <scene sceneID="Y3p-px-zkc">
             <objects>
-                <viewController id="Oad-9E-Hu2" sceneMemberID="viewController">
+                <viewController id="Oad-9E-Hu2" customClass="WebViewController" customModule="AlarmDJ" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aCB-6o-I2X"/>
                         <viewControllerLayoutGuide type="bottom" id="I7q-b4-ONt"/>
@@ -1009,6 +1013,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="webView" destination="VFA-e5-138" id="yC2-vw-gBc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kAV-UO-cyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1035,5 +1042,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="AkF-fj-35e"/>
         <segue reference="d10-1N-1zl"/>
+        <segue reference="liM-GV-hTx"/>
     </inferredMetricsTieBreakers>
 </document>
