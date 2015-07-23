@@ -32,8 +32,7 @@ class AlarmTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         alarms = LocalDataManager().loadAlarms()
         self.tableView.reloadData()
-        /*dispatch_async(dispatch_get_main_queue(), {
-                    })*/
+        setAlarmAlerts()
     }
 
     override func didReceiveMemoryWarning() {
@@ -109,5 +108,9 @@ class AlarmTableViewController: UITableViewController {
             view.alarm = alarms[index]
             view.alarmIndex = index
         }
+    }
+    
+    func setAlarmAlerts() {
+        
     }
 }
