@@ -7,21 +7,30 @@
 //
 import UIKit
 import Foundation
+import EventKit
 
 class DashboardTableViewController: UITableViewController {
-    //news titles, contents and URLs
+
+    // set up local data manager for settings
+    var ldm = LocalDataManager()
+    // news data
     var news = [String]()
-    var newsLoaded = false
-    
+    var newsLoaded: Bool = false
+    // weather data
+    var desc = "", image = "", city = "", currTemp = 0, minTemp = 0, maxTemp = 0
+    // calendar data
+    var events = Dictionary<String, String>()
     // Weather cell
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var ampmLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var weatherDescLabel: UILabel!
     @IBOutlet weak var currTempLabel: UILabel!
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    // Calendar Appt cell
+    @IBOutlet weak var apptNameLabel: UILabel!
+    @IBOutlet weak var apptDetailLabel: UILabel!
     // News cells
     @IBOutlet weak var titleLabel1: UILabel!
     @IBOutlet weak var subtitleLabel1: UILabel!
@@ -35,17 +44,65 @@ class DashboardTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    
+        // set up settings
+        var settings = ldm.loadSettings()
+        // set time
+        setTime(settings.twentyFourHour)
+        
+        var refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "updateData", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl = refreshControl
         
         self.getNewsGoogle("Apple", completionHandler: {
             results in
             self.news = results as! [(String)]
             self.loadNews()
+            self.tableView.reloadData()
         })
         
         // get zip code from settings
-        var zipcode = "49401"
+
+        var zipcode = settings.weatherZip
         self.getWeather(zipcode)
         
+        // loading the calendar event
+        //EventStuff
+        let eventStore = EKEventStore()
+        
+        //Event access
+        switch EKEventStore.authorizationStatusForEntityType(EKEntityTypeEvent) {
+        case .Authorized:
+            println("aut")
+            self.events = printTodaysEvents(eventStore)
+
+        case .Denied:
+            println("Access denied")
+        case .NotDetermined:
+            eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion:
+                {[weak self] (granted: Bool, error: NSError!) -> Void in
+                    if granted {
+                        println("granted")
+                        self!.events = self!.printTodaysEvents(eventStore)
+                        println(self!.events["title"])
+                        println(self!.events["start"])
+                    } else {
+                        println("Access denied")
+                    }
+                })
+        default:
+            println("Case Default")
+        }
+        
+        // load calendar info into view
+        self.loadCalendar()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        var timer = NSTimer(timeInterval: 1.0, target:self, selector: "updateData", userInfo: nil,  repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
         
     }
     
@@ -79,7 +136,34 @@ class DashboardTableViewController: UITableViewController {
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        return newsLoaded
+        return self.newsLoaded
+    }
+    
+    // Function used in the refresh control to update all of the data
+    func updateData() {
+        var settings = self.ldm.loadSettings()
+        // update weather data
+        self.loadWeather(self.desc, image: self.image, city: self.city, currTemp: self.currTemp, minTemp: self.minTemp, maxTemp: self.maxTemp)
+        
+        // update news data
+        self.loadNews()
+//        self.titleLabel1!.text = self.news[0]
+//        self.subtitleLabel1!.text = self.news[1]
+//        self.titleLabel2!.text = self.news[3]
+//        self.subtitleLabel2!.text = self.news[4]
+//        self.titleLabel3!.text = self.news[6]
+//        self.subtitleLabel3!.text = self.news[7]
+//        self.titleLabel4!.text = self.news[9]
+//        self.subtitleLabel4!.text = self.news[10]
+        
+        // update calendar data
+        self.loadCalendar()
+        
+        self.setTime(settings.twentyFourHour)
+
+        //self.tableView.reloadData()
+        //self.refreshControl?.endRefreshing()
+
     }
     
     /* Gives back an array of Title and Links to
@@ -174,27 +258,25 @@ class DashboardTableViewController: UITableViewController {
             let data = NSData(contentsOfURL: loc)!
             let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parseError)
             
-            // variables for weather cell items
-            var desc = "", image = "", city = "", currTemp = 0, minTemp = 0, maxTemp = 0
             // parsing the JSON file
             if let topLevelObj = parsedObject as? NSDictionary {
                 // Get weather description
                 if let weather = topLevelObj.objectForKey("weather") as? NSArray {
                     if let w = weather[0] as? NSDictionary {
-                        desc = w["description"] as! String
-                        image = w["icon"] as! String
+                        self.desc = w["description"] as! String
+                        self.image = w["icon"] as! String
                     }
                 }
                 // Get temperatures
                 if let main = topLevelObj.objectForKey("main") as? NSDictionary {
-                    currTemp = main["temp"] as! Int
-                    maxTemp = main["temp_max"] as! Int
-                    minTemp = main["temp_min"] as! Int
+                    self.currTemp = main["temp"] as! Int
+                    self.maxTemp = main["temp_max"] as! Int
+                    self.minTemp = main["temp_min"] as! Int
                 }
                 // Get city name
-                city = topLevelObj["name"] as! String
+                self.city = topLevelObj["name"] as! String
             }
-            self.loadWeather(desc, image: image, city: city, currTemp: currTemp, minTemp: minTemp, maxTemp: maxTemp)
+            self.loadWeather(self.desc, image: self.image, city: self.city, currTemp: self.currTemp, minTemp: self.minTemp, maxTemp: self.maxTemp)
         }
         task.resume()
 
@@ -210,4 +292,54 @@ class DashboardTableViewController: UITableViewController {
         self.imageView?.image = UIImage(named: image)
     }
     
+    /* Requires an EKEventStore() Object
+    * Returns a Dictionary with the title and start DateTime of the
+    * first event of the day
+    */
+    func printTodaysEvents(store: EKEventStore) -> Dictionary<String, String> {
+        var result = Dictionary<String, String>()
+        let cals = store.calendarsForEntityType(EKEntityTypeEvent)
+
+        let today = NSDate()
+        
+        //yesterday
+        let delta = NSDate()
+        let tomorrow = delta.dateByAddingTimeInterval(60*60*24)
+        
+        println(today)
+        println(tomorrow)
+        
+        let fetchCalendarEvent =
+        store.predicateForEventsWithStartDate(today, endDate: tomorrow, calendars:
+            cals)
+        
+        if let eventlist = store.eventsMatchingPredicate(fetchCalendarEvent) {
+            var event = eventlist[0] as! EKEvent
+            let title = event.title!
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd 'at' h:mm a" // superset of OP's format
+            let start = dateFormatter.stringFromDate(event.startDate)
+            result = ["title": title, "start": start]
+        } else {
+            result = ["title": "There are no Events", "start": ""]
+        }
+        return result
+    }
+    
+    func loadCalendar() {
+        self.apptNameLabel!.text = events["title"]
+        self.apptDetailLabel!.text = events["start"]
+    }
+    
+    func setTime(format24: Bool) {
+        var time: NSDate = NSDate()
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "EDT")
+        if format24 {
+            dateFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
+        } else {
+            dateFormatter.setLocalizedDateFormatFromTemplate("hh:mm")
+        }
+        self.timeLabel!.text = dateFormatter.stringFromDate(time)
+    }
 }

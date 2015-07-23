@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TCl-d4-mDn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TCl-d4-mDn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -641,16 +641,6 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AM/PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEl-G2-Vm8">
-                                                    <rect key="frame" x="309" y="27" width="58" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="58" id="TRy-Xf-4k8"/>
-                                                        <constraint firstAttribute="height" constant="21" id="i8v-sb-MHc"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYE-nU-Lm5">
                                                     <rect key="frame" x="8" y="70" width="359" height="21"/>
                                                     <constraints>
@@ -721,14 +711,33 @@
                                                 <constraint firstItem="rt8-Q6-DZC" firstAttribute="top" secondItem="hyH-IP-uYU" secondAttribute="topMargin" id="P5C-rx-Vgp"/>
                                                 <constraint firstAttribute="centerX" secondItem="rt8-Q6-DZC" secondAttribute="centerX" id="QgA-2x-sRF"/>
                                                 <constraint firstItem="peh-v2-Bp0" firstAttribute="bottom" secondItem="kZ7-HF-Ixw" secondAttribute="bottom" id="TQF-Z4-sxa"/>
-                                                <constraint firstItem="gEl-G2-Vm8" firstAttribute="top" secondItem="rt8-Q6-DZC" secondAttribute="bottom" constant="-35" id="i2C-uS-gXA"/>
                                                 <constraint firstAttribute="centerX" secondItem="peh-v2-Bp0" secondAttribute="centerX" id="iSU-6h-uJ6"/>
-                                                <constraint firstItem="gEl-G2-Vm8" firstAttribute="trailing" secondItem="hyH-IP-uYU" secondAttribute="trailingMargin" id="krI-Ac-wFB"/>
                                                 <constraint firstItem="xOk-M7-Qry" firstAttribute="bottom" secondItem="peh-v2-Bp0" secondAttribute="bottom" id="mds-4v-ks3"/>
                                                 <constraint firstItem="xOk-M7-Qry" firstAttribute="trailing" secondItem="hyH-IP-uYU" secondAttribute="trailingMargin" id="uJX-FX-hPJ"/>
                                                 <constraint firstItem="fTy-Pt-rhd" firstAttribute="top" secondItem="peh-v2-Bp0" secondAttribute="top" id="yga-FG-iFM"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CalendarCell" rowHeight="52" id="ZC4-cB-KOi">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZC4-cB-KOi" id="o8y-LK-Khm">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jA-wb-cb3">
+                                                    <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZo-Cg-znJ">
+                                                    <rect key="frame" x="8" y="30" width="359" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NewsCell" rowHeight="68" id="Htl-C5-HeJ" customClass="NewsTableViewCell" customModule="AlarmDJ" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -926,7 +935,8 @@
                     <navigationItem key="navigationItem" title="Dashboard" id="Fn9-cz-WmR"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="ampmLabel" destination="gEl-G2-Vm8" id="5JG-NF-QPO"/>
+                        <outlet property="apptDetailLabel" destination="DZo-Cg-znJ" id="jqB-jS-Ch6"/>
+                        <outlet property="apptNameLabel" destination="9jA-wb-cb3" id="49O-3L-FC0"/>
                         <outlet property="cityLabel" destination="IYE-nU-Lm5" id="Ncz-CL-LiA"/>
                         <outlet property="currTempLabel" destination="kZ7-HF-Ixw" id="4um-ea-aUm"/>
                         <outlet property="imageView" destination="peh-v2-Bp0" id="mJt-ch-y2c"/>
