@@ -30,9 +30,10 @@ class AlarmTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        dispatch_async(dispatch_get_main_queue(), {
-            self.tableView.reloadData()
-        })
+        alarms = LocalDataManager().loadAlarms()
+        self.tableView.reloadData()
+        /*dispatch_async(dispatch_get_main_queue(), {
+                    })*/
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,8 +46,9 @@ class AlarmTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        alarms = LocalDataManager().loadAlarms()
         var cell: AlarmCell = self.tableView.dequeueReusableCellWithIdentifier("AlarmCell") as! AlarmCell
+        println(indexPath.row)
+        println(alarms.count)
         var alarm: Alarm = alarms[indexPath.row]
         
         //cell.timeLabel.text! = alarm.time

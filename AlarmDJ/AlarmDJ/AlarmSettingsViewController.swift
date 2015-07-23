@@ -47,6 +47,7 @@ class AlarmSettingsViewController: UITableViewController, UITextFieldDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SelectAlarmRingtone" {
+            saveAlarms()
             var view = segue.destinationViewController as! RingtoneSelectorViewController
             view.alarm = self.alarm
             view.alarmIndex = self.alarmIndex
@@ -58,8 +59,7 @@ class AlarmSettingsViewController: UITableViewController, UITextFieldDelegate {
         return false
     }
     
-
-    @IBAction func saveBtnClicked(sender: AnyObject) {
+    func saveAlarms() {
         var ldm = LocalDataManager()
         var alarms = ldm.loadAlarms()
         
@@ -67,11 +67,16 @@ class AlarmSettingsViewController: UITableViewController, UITextFieldDelegate {
         
         if (alarmIndex < 0){
             alarms.append(alarm)
+            alarmIndex = alarms.count - 1
         } else {
             alarms[alarmIndex] = alarm
         }
         
         ldm.saveAlarms(alarms: alarms)
+    }
+
+    @IBAction func saveBtnClicked(sender: AnyObject) {
+        saveAlarms()
         navigationController!.popViewControllerAnimated(true)
     }
     

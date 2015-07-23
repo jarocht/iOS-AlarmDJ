@@ -13,28 +13,28 @@ class LocalDataManager {
     func loadSettings() -> SettingsContainer{
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        var tfh: Bool
+        var tfh: Bool = false
         if defaults.valueForKey(Keys.twentyFourHour) != nil {
             tfh = defaults.valueForKey(Keys.twentyFourHour) as! Bool
-        } else {
-            tfh = false
         }
-        
-        var si: Int
+        var si: Int = 9
         if defaults.valueForKey(Keys.snoozeInterval) != nil {
             si = defaults.valueForKey(Keys.snoozeInterval) as! Int
-        } else {
-            si = 9
         }
-        
-        var wz: String
+        var wz: String = "49428"
         if defaults.valueForKey(Keys.weatherZip) != nil {
             wz = defaults.valueForKey(Keys.weatherZip) as! String
-        } else {
-            wz = "49428"
+        }
+        var nq: String = "Apple"
+        if defaults.valueForKey(Keys.newsQuery) != nil {
+            nq = defaults.valueForKey(Keys.newsQuery) as! String
+        }
+        var mg: String = "Country"
+        if defaults.valueForKey(Keys.musicGenre) != nil {
+            mg = defaults.valueForKey(Keys.musicGenre) as! String
         }
         
-        return SettingsContainer(twentyFourHour: tfh, snoozeInterval: si, weatherZip: wz)
+        return SettingsContainer(twentyFourHour: tfh, snoozeInterval: si, weatherZip: wz, newsQuery: nq, musicGenre: mg)
     }
     
     func saveSettings(settingsContainer sc: SettingsContainer) {
@@ -43,6 +43,8 @@ class LocalDataManager {
         defaults.setValue(sc.twentyFourHour, forKey: Keys.twentyFourHour)
         defaults.setValue(sc.snoozeInterval, forKey: Keys.snoozeInterval)
         defaults.setValue(sc.weatherZip, forKey: Keys.weatherZip)
+        defaults.setValue(sc.newsQuery, forKey: Keys.newsQuery)
+        defaults.setValue(sc.musicGenre, forKey: Keys.musicGenre)
         
         defaults.synchronize()
     }
@@ -118,15 +120,19 @@ class SettingsContainer {
     var twentyFourHour: Bool
     var snoozeInterval: Int
     var weatherZip: String
+    var newsQuery: String
+    var musicGenre: String
     
     convenience init(){
-        self.init(twentyFourHour: false, snoozeInterval: 9, weatherZip: "49428")
+        self.init(twentyFourHour: false, snoozeInterval: 9, weatherZip: "49428", newsQuery: "Apple", musicGenre: "Country")
     }
     
-    init(twentyFourHour: Bool, snoozeInterval: Int, weatherZip: String){
+    init(twentyFourHour: Bool, snoozeInterval: Int, weatherZip: String, newsQuery: String, musicGenre: String){
         self.twentyFourHour = twentyFourHour
         self.snoozeInterval = snoozeInterval
         self.weatherZip = weatherZip
+        self.newsQuery = newsQuery
+        self.musicGenre = musicGenre
     }
 }
 
@@ -158,6 +164,8 @@ struct Keys {
     static let twentyFourHour = "twentyFourHour"
     static let snoozeInterval = "snoozeInterval"
     static let weatherZip = "weatherZip"
+    static let newsQuery = "newsQuery"
+    static let musicGenre = "musicGenre"
     static let alarmCount = "alarmCount"
     static let alarmDays = "alarmDays_"
     static let alarmTime = "alarmTime_"
