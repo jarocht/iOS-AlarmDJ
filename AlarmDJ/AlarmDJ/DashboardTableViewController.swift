@@ -114,21 +114,8 @@ class DashboardTableViewController: UITableViewController {
             var timeString = formatter.stringFromDate(date!)
             speech = "Your first appointment in your calendar is " + self.events["title"]! + " at " + timeString
             synthesizer.speakUtterance(self.createUtterance(speech))
+            println("spoke the calendar appt")
         }
-        
-        // play music
-        //PLAY BY GENRE
-        let genre:String = settings.musicGenre
-        var query = MPMediaQuery.songsQuery()
-        let predicateByGenre = MPMediaPropertyPredicate(value: genre, forProperty: MPMediaItemPropertyGenre)
-        query.filterPredicates = NSSet(object: predicateByGenre) as Set<NSObject>
-        
-        let mediaCollection = MPMediaItemCollection(items: query.items)
-        
-        let player = MPMusicPlayerController.iPodMusicPlayer()
-        player.setQueueWithItemCollection(mediaCollection)
-        
-        player.play()
         
     }
     
@@ -138,6 +125,32 @@ class DashboardTableViewController: UITableViewController {
         var timer = NSTimer(timeInterval: 1.0, target:self, selector: "updateData", userInfo: nil,  repeats: true)
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
         
+    }
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
+        if motion == .MotionShake {
+            var settings = self.ldm.loadSettings()
+            // play music
+            //PLAY BY GENRE
+            println("before the holding loop")
+            while synthesizer.speaking {println("in the holding loop")} // don't do anything while synthesizer is speaking
+            println("after the holding loop")
+            let genre:String = settings.musicGenre
+            var query = MPMediaQuery.songsQuery()
+            let predicateByGenre = MPMediaPropertyPredicate(value: genre, forProperty: MPMediaItemPropertyGenre)
+            query.filterPredicates = NSSet(object: predicateByGenre) as Set<NSObject>
+            
+            let mediaCollection = MPMediaItemCollection(items: query.items)
+            
+            let player = MPMusicPlayerController.iPodMusicPlayer()
+            player.setQueueWithItemCollection(mediaCollection)
+            
+            player.play()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -246,6 +259,7 @@ class DashboardTableViewController: UITableViewController {
             for var i = 0; i < 4; i++ {
                 speech = self.news[i*3]
                 self.synthesizer.speakUtterance(self.createUtterance(speech))
+                println("speaking the news")
             }
 
         }
@@ -315,6 +329,7 @@ class DashboardTableViewController: UITableViewController {
             self.synthesizer.speakUtterance(self.createUtterance(speech))
             speech = "\(self.desc). The current temperature is \(self.currTemp) degrees Fahrenheit. The high for today is \(self.maxTemp)"
             self.synthesizer.speakUtterance(self.createUtterance(speech))
+            println("speaking the weather")
         }
         task.resume()
     }
