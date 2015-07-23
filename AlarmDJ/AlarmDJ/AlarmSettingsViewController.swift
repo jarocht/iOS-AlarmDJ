@@ -51,6 +51,10 @@ class AlarmSettingsViewController: UITableViewController, UITextFieldDelegate {
             var view = segue.destinationViewController as! RingtoneSelectorViewController
             view.alarm = self.alarm
             view.alarmIndex = self.alarmIndex
+        } else if segue.identifier == "testAlarmSegue" {
+            saveAlarms()
+            var view = segue.destinationViewController as! AlarmAlertViewController
+            view.alarm = self.alarm
         }
     }
     

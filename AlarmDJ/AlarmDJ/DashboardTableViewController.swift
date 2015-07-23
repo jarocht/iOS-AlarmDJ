@@ -62,7 +62,6 @@ class DashboardTableViewController: UITableViewController {
         })
         
         // get zip code from settings
-
         var zipcode = settings.weatherZip
         self.getWeather(zipcode)
         
@@ -114,7 +113,6 @@ class DashboardTableViewController: UITableViewController {
             var timeString = formatter.stringFromDate(date!)
             speech = "Your first appointment in your calendar is " + self.events["title"]! + " at " + timeString
             synthesizer.speakUtterance(self.createUtterance(speech))
-            println("spoke the calendar appt")
         }
         
     }

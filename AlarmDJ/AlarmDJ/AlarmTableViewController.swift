@@ -102,6 +102,9 @@ class AlarmTableViewController: UITableViewController {
             let index = self.tableView.indexPathForSelectedRow()!.row
             view.alarm = alarms[index]
             view.alarmIndex = index
+        } else if segue.identifier == "AlarmAlertSegue" {
+            let view = segue.destinationViewController as! AlarmAlertViewController
+            view.alarm = sender as! Alarm
         }
     }
     

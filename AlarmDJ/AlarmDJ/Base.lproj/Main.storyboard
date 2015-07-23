@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TCl-d4-mDn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TCl-d4-mDn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -308,7 +308,7 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="cUP-4c-21X" kind="show" id="qC7-0I-HYg"/>
+                                                        <segue destination="cUP-4c-21X" kind="show" identifier="testAlarmSegue" id="qC7-0I-HYg"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -411,16 +411,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xzd-ao-sw0">
-                            <rect key="frame" x="-23" y="-15" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <segue destination="CvG-Wf-UwV" kind="show" identifier="testingSegue" id="3AS-l8-aRF"/>
-                            </connections>
-                        </button>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="AlarmCell" rowHeight="75" id="WUa-js-IIt" customClass="AlarmCell" customModule="AlarmDJ" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -574,7 +564,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="CvG-Wf-UwV" kind="show" id="d10-1N-1zl"/>
+                                    <action selector="dismissPressed:" destination="cUP-4c-21X" eventType="touchUpInside" id="XYV-td-jOf"/>
+                                    <segue destination="CvG-Wf-UwV" kind="show" identifier="dismissSegue" id="d10-1N-1zl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xO-je-OJC">
@@ -583,6 +574,9 @@
                                 <state key="normal" title="Snooze">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="RQH-Tg-rVf" kind="show" identifier="AlarmSnoozeSegue" id="Djj-pg-yLL"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HH:MM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTs-TV-8SX">
                                 <rect key="frame" x="102" y="64" width="171" height="60"/>
@@ -590,26 +584,21 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AM/PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ic2-Jm-seb">
-                                <rect key="frame" x="301" y="83" width="58" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="9xO-je-OJC" secondAttribute="centerX" id="6DQ-QR-p5a"/>
-                            <constraint firstItem="ic2-Jm-seb" firstAttribute="trailing" secondItem="Pgt-x7-hbN" secondAttribute="trailingMargin" id="NvY-a1-Ou6"/>
                             <constraint firstAttribute="centerX" secondItem="cTs-TV-8SX" secondAttribute="centerX" id="PHq-nR-jUs"/>
                             <constraint firstAttribute="centerX" secondItem="4Hz-kf-Y1K" secondAttribute="centerX" id="R4R-ek-gGU"/>
                             <constraint firstAttribute="centerY" secondItem="9xO-je-OJC" secondAttribute="centerY" id="hGd-P9-DTn"/>
                             <constraint firstItem="wcG-9c-VIx" firstAttribute="top" secondItem="4Hz-kf-Y1K" secondAttribute="bottom" constant="20" id="mcQ-YB-SYa"/>
-                            <constraint firstItem="ic2-Jm-seb" firstAttribute="top" secondItem="2Mj-j8-8am" secondAttribute="bottom" constant="19" id="qCW-bF-1pC"/>
                             <constraint firstItem="cTs-TV-8SX" firstAttribute="top" secondItem="2Mj-j8-8am" secondAttribute="bottom" id="tmL-EE-CPu"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="timeLabel" destination="cTs-TV-8SX" id="2qW-ME-yve"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Jm-oC-1de" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1012,8 +1001,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="OSZ-sJ-2Sd"/>
+        <segue reference="Djj-pg-yLL"/>
         <segue reference="AkF-fj-35e"/>
-        <segue reference="d10-1N-1zl"/>
         <segue reference="d6d-ia-8GU"/>
     </inferredMetricsTieBreakers>
 </document>
