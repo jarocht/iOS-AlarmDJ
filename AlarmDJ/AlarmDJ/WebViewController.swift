@@ -28,6 +28,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        println(webUrl)
         let theUrl : NSURL? = NSURL(string: self.webUrl!)
         
         let request : NSMutableURLRequest? = NSMutableURLRequest(URL: theUrl!, cachePolicy: NSURLRequestCachePolicy.UseProtocolCachePolicy, timeoutInterval: 10)

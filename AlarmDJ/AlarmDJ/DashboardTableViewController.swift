@@ -11,6 +11,7 @@ import Foundation
 class DashboardTableViewController: UITableViewController {
     //news titles, contents and URLs
     var news = [String]()
+    var newsLoaded = false
     
     // Weather cell
     @IBOutlet weak var timeLabel: UILabel!
@@ -73,8 +74,12 @@ class DashboardTableViewController: UITableViewController {
             (segue.destinationViewController as? WebViewController)?.webUrl = self.news[11]
         } else if segue.identifier == "newsMore" {
             (segue.destinationViewController as? WebViewController)?.title = "More news"
-            (segue.destinationViewController as? WebViewController)?.webUrl = self.news[12]
+            (segue.destinationViewController as? WebViewController)?.webUrl = "https://www.google.com/search?q=" + "Apple" + "&tbm=nws&cad=h"
         }
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        return newsLoaded
     }
     
     /* Gives back an array of Title and Links to
@@ -127,6 +132,7 @@ class DashboardTableViewController: UITableViewController {
             }
             completionHandler(results: resultsArray)
             self.news = resultsArray as [String]
+            self.newsLoaded = true
         }
         task.resume()
     }
