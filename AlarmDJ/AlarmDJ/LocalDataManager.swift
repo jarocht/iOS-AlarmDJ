@@ -61,6 +61,7 @@ class LocalDataManager {
         for var i = 0; i < count; i++ {
             var days: [Int] = [0,0,0,0,0,0,0]
             var time: NSDate = NSDate()
+            var title: String = ""
             var repeat: Bool = false
             var enabled: Bool = true
             
@@ -70,6 +71,9 @@ class LocalDataManager {
             if defaults.valueForKey("\(Keys.alarmTime)\(i)") != nil {
                 time = defaults.valueForKey("\(Keys.alarmTime)\(i)") as! NSDate
             }
+            if defaults.valueForKey("\(Keys.alarmTitle)\(i)") != nil {
+                title = defaults.valueForKey("\(Keys.alarmTitle)\(i)") as! String
+            }
             if defaults.valueForKey("\(Keys.alarmRepeat)\(i)") != nil {
                 repeat = defaults.valueForKey("\(Keys.alarmRepeat)\(i)") as! Bool
             }
@@ -77,7 +81,7 @@ class LocalDataManager {
                 enabled = defaults.valueForKey("\(Keys.alarmEnabled)\(i)") as! Bool
             }
             
-            alarms.append(Alarm(days: days, time: time, repeat: repeat, enabled: enabled))
+            alarms.append(Alarm(days: days, time: time, title: title, repeat: repeat, enabled: enabled))
         }
         
         return alarms
@@ -91,6 +95,7 @@ class LocalDataManager {
         for var i = 0; i < a.count; i++ {
             defaults.setValue(a[i].days, forKey: "\(Keys.alarmDays)\(i)")
             defaults.setValue(a[i].time, forKey: "\(Keys.alarmTime)\(i)")
+            defaults.setValue(a[i].title, forKey: "\(Keys.alarmTitle)\(i)")
             defaults.setValue(a[i].repeat, forKey: "\(Keys.alarmRepeat)\(i)")
             defaults.setValue(a[i].enabled, forKey: "\(Keys.alarmEnabled)\(i)")
         }
@@ -118,12 +123,14 @@ class SettingsContainer {
 class Alarm {
     var days: [Int]
     var time: NSDate
+    var title: String
     var repeat: Bool
     var enabled: Bool
     
-    init (days: [Int], time: NSDate, repeat: Bool, enabled: Bool) {
+    init (days: [Int], time: NSDate, title: String, repeat: Bool, enabled: Bool) {
         self.days = days
         self.time = time
+        self.title = title
         self.repeat = repeat
         self.enabled = enabled
     }
@@ -137,6 +144,7 @@ struct Keys {
     static let alarmCount = "alarmCount"
     static let alarmDays = "alarmDays_"
     static let alarmTime = "alarmTime_"
+    static let alarmTitle = "alarmTitle_"
     static let alarmRepeat = "alarmRepeat_"
     static let alarmEnabled = "alarmEnabled_"
 }

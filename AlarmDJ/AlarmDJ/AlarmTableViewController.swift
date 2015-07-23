@@ -22,9 +22,9 @@ class AlarmTableViewController: UITableViewController {
         //settings.weatherZip = "49426"
         //ldm.saveSettings(settingsContainer: settings)
         
-        var alarm = Alarm(days: [0,0,0,0,0,0,0], time: NSDate(), repeat: false, enabled: true)
-        var alarm2 = Alarm(days: [1,1,1,1,1,1,1], time: NSDate(), repeat: false, enabled: false)
-        //ldm.saveAlarms(alarms: [alarm, alarm2])
+        var alarm = Alarm(days: [0,0,0,0,0,0,0], time: NSDate(), title: "title 1", repeat: false, enabled: true)
+        var alarm2 = Alarm(days: [1,1,1,1,1,1,1], time: NSDate(), title: "title 2", repeat: false, enabled: false)
+        ldm.saveAlarms(alarms: [alarm, alarm2])
 
        alarms = ldm.loadAlarms()
     }
@@ -90,20 +90,21 @@ class AlarmTableViewController: UITableViewController {
             cell.saturdayLabel.textColor = UIColor.greenColor()
         }
         
+        cell.titleLabel.text! = alarm.title
         cell.activeSwitch.on = alarm.enabled
         
         return cell
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var view = segue.destinationViewController as! AlarmSettingsViewController
-
         if segue.identifier == "NewAlarmSegue" {
-            
+            //Do nothing special
         } else if segue.identifier == "ExistingAlarmSegue" {
+            let view = segue.destinationViewController as! AlarmSettingsViewController
             let index = self.tableView.indexPathForSelectedRow()!.row
             view.date = alarms[index].time
             view.days = alarms[index].days
+            view.titleText = alarms[index].title
             view.alarmIndex = index
         }
     }

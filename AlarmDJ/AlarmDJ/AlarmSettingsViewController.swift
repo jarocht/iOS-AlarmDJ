@@ -20,7 +20,7 @@ class AlarmSettingsViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var fridayBtn: UIButton!
     @IBOutlet weak var saturdayBtn: UIButton!
     @IBOutlet weak var titleTextField: UITextField!
-    
+    var titleText: String = ""
     @IBOutlet weak var snoozeEnabledBtn: UISwitch!
     @IBOutlet weak var repeatEnabledBtn: UISwitch!
     @IBOutlet weak var deleteAlarmBtn: UIButton!
@@ -34,6 +34,7 @@ class AlarmSettingsViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewWillAppear(animated: Bool) {
         datePicker.setDate(date, animated: true)
+        titleTextField.text! = titleText
         sundayBtn.selected = days[0] == 1
         mondayBtn.selected = days[1] == 1
         tuesdayBtn.selected = days[2] == 1
@@ -53,7 +54,8 @@ class AlarmSettingsViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func saveBtnClicked(sender: AnyObject) {
         var ldm = LocalDataManager()
         var alarms = ldm.loadAlarms()
-        var alarm = Alarm(days: days, time: NSDate(), repeat: snoozeEnabledBtn.on, enabled: true)
+        
+        var alarm = Alarm(days: days, time: datePicker.date, title: titleTextField.text!, repeat: snoozeEnabledBtn.on, enabled: true)
         
         if (alarmIndex < 0){
             alarms.append(alarm)

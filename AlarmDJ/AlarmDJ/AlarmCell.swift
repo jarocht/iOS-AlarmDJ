@@ -12,6 +12,7 @@ class AlarmCell: UITableViewCell{
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var amLabel: UILabel!
     @IBOutlet weak var pmLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     
     @IBOutlet weak var sundayLabel: UILabel!
