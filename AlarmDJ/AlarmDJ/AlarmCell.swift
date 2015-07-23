@@ -24,11 +24,11 @@ class AlarmCell: UITableViewCell{
     @IBOutlet weak var saturdayLabel: UILabel!
     
     @IBOutlet weak var activeSwitch: UISwitch!
-    @IBAction func activeSwitchClicked(sender: AnyObject) {
+    /*@IBAction func activeSwitchClicked(sender: AnyObject) {
         let index = (self.superview?.superview as! UITableView).indexPathForCell(self)!.row
         var ldm = LocalDataManager()
         var alarms = ldm.loadAlarms()
         alarms[index].enabled = activeSwitch.on
         ldm.saveAlarms(alarms: alarms)
-    }
+    }*/
 }

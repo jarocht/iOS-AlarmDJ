@@ -122,14 +122,16 @@ class DashboardTableViewController: UITableViewController {
         var query = MPMediaQuery.songsQuery()
         let predicateByGenre = MPMediaPropertyPredicate(value: genre, forProperty: MPMediaItemPropertyGenre)
         query.filterPredicates = NSSet(object: predicateByGenre) as Set<NSObject>
-        
-        let mediaCollection = MPMediaItemCollection(items: query.items)
-        
-        let player = MPMusicPlayerController.iPodMusicPlayer()
-        player.setQueueWithItemCollection(mediaCollection)
-        
-        player.play()
-        
+        println(query.items.count)
+        if query.items.count > 0 {
+            let mediaCollection = MPMediaItemCollection(items: query.items)
+            
+            if let player = MPMusicPlayerController.iPodMusicPlayer() {
+                player.setQueueWithItemCollection(mediaCollection)
+                
+                player.play()
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {

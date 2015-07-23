@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TCl-d4-mDn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TCl-d4-mDn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -478,7 +478,7 @@
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DFJ-GA-r6J">
                                             <rect key="frame" x="285" y="21" width="51" height="31"/>
                                             <connections>
-                                                <action selector="activeSwitchClicked:" destination="WUa-js-IIt" eventType="valueChanged" id="0zO-eV-Ut8"/>
+                                                <action selector="alarmEnabledSwitched:" destination="RQH-Tg-rVf" eventType="valueChanged" id="BpS-21-Fcc"/>
                                             </connections>
                                         </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hiL-yp-gWz">
@@ -548,6 +548,7 @@
                     <connections>
                         <outlet property="alarmTableView" destination="Gbh-BF-gtr" id="o6f-tZ-TMp"/>
                         <outlet property="tableView" destination="Gbh-BF-gtr" id="wQO-md-52Z"/>
+                        <segue destination="cUP-4c-21X" kind="show" identifier="AlarmAlertSegue" id="OSZ-sJ-2Sd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSw-K0-WZb" userLabel="First Responder" sceneMemberID="firstResponder"/>
