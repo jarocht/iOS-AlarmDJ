@@ -37,16 +37,26 @@ class DashboardTableViewController: UITableViewController {
     @IBOutlet weak var apptDetailLabel: UILabel!
     // News cells
     @IBOutlet weak var titleLabel1: UILabel!
-    @IBOutlet weak var subtitleLabel1: UILabel!
     @IBOutlet weak var titleLabel2: UILabel!
-    @IBOutlet weak var subtitleLabel2: UILabel!
     @IBOutlet weak var titleLabel3: UILabel!
-    @IBOutlet weak var subtitleLabel3: UILabel!
     @IBOutlet weak var titleLabel4: UILabel!
-    @IBOutlet weak var subtitleLabel4: UILabel!
+    // layout for news cells
+//    subtitleLabel1.lineBreakMode = NSLineBreakMode.ByWordWrapping
+//    subtitleLabel1.numberOfLines = 2
+//    subtitleLabel2.lineBreakMode = NSLineBreakMode.ByWordWrapping
+//    subtitleLabel2.numberOfLines = 2
+//    subtitleLabel3.lineBreakMode = NSLineBreakMode.ByWordWrapping
+//    subtitleLabel3.numberOfLines = 2
+//    subtitleLabel4.lineBreakMode = NSLineBreakMode.ByWordWrapping
+//    subtitleLabel4.numberOfLines = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // layout for news cells
+        titleLabel1.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        titleLabel1.numberOfLines = 2
+        
         
         // set up settings
         var settings = ldm.loadSettings()
@@ -102,9 +112,8 @@ class DashboardTableViewController: UITableViewController {
         var utterance = self.createUtterance(speech)
         synthesizer.speakUtterance(utterance)
         // speak news
-
         // speak calendar event
-        if self.events["title"]! != "There are no Events" {
+        if self.events["title"] != nil && self.events["title"]! != "There are no Events" {
             var dateString = self.events["start"]!
             var formatter = NSDateFormatter()
             formatter.dateFormat = "yyyy-MM-dd 'at' h:mm a"
@@ -282,14 +291,17 @@ class DashboardTableViewController: UITableViewController {
     
     func loadNews() {
         if self.newsLoaded {
+            //for accessing subtitles of an article grab the
+            //array index +1 from the titles index in the
+            //array self.news[i]
             self.titleLabel1!.text = self.news[0]
-            self.subtitleLabel1!.text = self.news[1]
+            //self.subtitleLabel1!.text = self.news[1]
             self.titleLabel2!.text = self.news[3]
-            self.subtitleLabel2!.text = self.news[4]
+            //self.subtitleLabel2!.text = self.news[4]
             self.titleLabel3!.text = self.news[6]
-            self.subtitleLabel3!.text = self.news[7]
+            //self.subtitleLabel3!.text = self.news[7]
             self.titleLabel4!.text = self.news[9]
-            self.subtitleLabel4!.text = self.news[10]
+            //self.subtitleLabel4!.text = self.news[10]
         }
     }
     
