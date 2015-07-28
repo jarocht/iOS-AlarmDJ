@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class RingtoneSelectorViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -47,6 +48,13 @@ class RingtoneSelectorViewController: UIViewController, UIPickerViewDataSource, 
     }
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         alarm.ringtoneId = ringtoneValues[row]
+        // only rings if system sounds are avaible
+        // this is the case when the app is run on a
+        // arm architecture
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+        #else
+            AudioServicesPlaySystemSound(UInt32(ringtoneValues[row]))
+        #endif
     }
     
     
