@@ -141,22 +141,26 @@ class DashboardTableViewController: UITableViewController {
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
         if motion == .MotionShake {
             var settings = self.ldm.loadSettings()
+            // waiting for siri to finish reading = did not work in my tests
+//                println("before the holding loop")
+//                while synthesizer.speaking {println("in the holding loop")} // don't do anything while synthesizer is speaking
+//                println("after the holding loop")
+            
+            
             // play music
-            //PLAY BY GENRE
-            println("before the holding loop")
-            while synthesizer.speaking {println("in the holding loop")} // don't do anything while synthesizer is speaking
-            println("after the holding loop")
             let genre:String = settings.musicGenre
             var query = MPMediaQuery.songsQuery()
             let predicateByGenre = MPMediaPropertyPredicate(value: genre, forProperty: MPMediaItemPropertyGenre)
             query.filterPredicates = NSSet(object: predicateByGenre) as Set<NSObject>
             
-            let mediaCollection = MPMediaItemCollection(items: query.items)
+            if query.items.count > 0 {
+                let mediaCollection = MPMediaItemCollection(items: query.items)
             
-            let player = MPMusicPlayerController.iPodMusicPlayer()
-            player.setQueueWithItemCollection(mediaCollection)
-            
-            player.play()
+                let player = MPMusicPlayerController.iPodMusicPlayer()
+                player.setQueueWithItemCollection(mediaCollection)
+                
+                player.play()
+            }
         }
     }
     

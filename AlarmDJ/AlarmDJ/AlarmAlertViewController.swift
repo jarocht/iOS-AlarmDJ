@@ -25,7 +25,13 @@ class AlarmAlertViewController: UIViewController{
     
     override func viewDidAppear(animated: Bool) {
         var toneIdSound = UInt32(alarm.ringtoneId)
-        //AudioServicesPlaySystemSound(toneIdSound)
+        // only rings if system sounds are avaible
+        // this is the case when the app is run on a
+        // arm architecture
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+        #else
+        AudioServicesPlaySystemSound(toneIdSound)
+        #endif
         super.viewDidAppear(animated)
         
         var timer = NSTimer(timeInterval: 1.0, target:self, selector: "setTime", userInfo: nil,  repeats: true)
