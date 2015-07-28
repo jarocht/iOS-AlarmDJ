@@ -408,9 +408,9 @@
             <objects>
                 <tableViewController id="RQH-Tg-rVf" customClass="AlarmTableViewController" customModule="AlarmDJ" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="Gbh-BF-gtr">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="AlarmCell" rowHeight="75" id="WUa-js-IIt" customClass="AlarmCell" customModule="AlarmDJ" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -465,7 +465,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DFJ-GA-r6J">
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DFJ-GA-r6J">
                                             <rect key="frame" x="285" y="21" width="51" height="31"/>
                                             <connections>
                                                 <action selector="alarmEnabledSwitched:" destination="RQH-Tg-rVf" eventType="valueChanged" id="BpS-21-Fcc"/>
@@ -941,6 +941,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Mg-TB-Wd0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <connections>
                         <segue destination="RQH-Tg-rVf" kind="relationship" relationship="rootViewController" id="bTi-w4-ZUk"/>
@@ -952,9 +954,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="OSZ-sJ-2Sd"/>
-        <segue reference="Djj-pg-yLL"/>
-        <segue reference="AkF-fj-35e"/>
         <segue reference="d6d-ia-8GU"/>
+        <segue reference="OSZ-sJ-2Sd"/>
+        <segue reference="bTi-w4-ZUk"/>
+        <segue reference="AkF-fj-35e"/>
     </inferredMetricsTieBreakers>
 </document>
