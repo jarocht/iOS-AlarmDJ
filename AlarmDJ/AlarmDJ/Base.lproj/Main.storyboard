@@ -557,8 +557,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xO-je-OJC">
+                                <rect key="frame" x="16" y="259" width="343" height="115"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="115" id="xnQ-wn-9qV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="Snooze">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="RQH-Tg-rVf" kind="show" identifier="AlarmSnoozeSegue" id="Djj-pg-yLL"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HH:MM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTs-TV-8SX">
+                                <rect key="frame" x="16" y="28" width="343" height="115"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="115" id="hnf-AG-Nxy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <color key="textColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Hz-kf-Y1K">
-                                <rect key="frame" x="102" y="575" width="171" height="72"/>
+                                <rect key="frame" x="16" y="532" width="343" height="115"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="115" id="LKf-2g-48u"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <state key="normal" title="Dismiss">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -568,31 +593,21 @@
                                     <segue destination="CvG-Wf-UwV" kind="show" identifier="dismissSegue" id="d10-1N-1zl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xO-je-OJC">
-                                <rect key="frame" x="105" y="298" width="165" height="72"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <state key="normal" title="Snooze">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="RQH-Tg-rVf" kind="show" identifier="AlarmSnoozeSegue" id="Djj-pg-yLL"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="HH:MM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTs-TV-8SX">
-                                <rect key="frame" x="102" y="66" width="171" height="60"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="9xO-je-OJC" secondAttribute="centerX" id="6DQ-QR-p5a"/>
-                            <constraint firstAttribute="centerX" secondItem="cTs-TV-8SX" secondAttribute="centerX" id="PHq-nR-jUs"/>
-                            <constraint firstAttribute="centerX" secondItem="4Hz-kf-Y1K" secondAttribute="centerX" id="R4R-ek-gGU"/>
-                            <constraint firstAttribute="centerY" secondItem="9xO-je-OJC" secondAttribute="centerY" id="hGd-P9-DTn"/>
-                            <constraint firstItem="wcG-9c-VIx" firstAttribute="top" secondItem="4Hz-kf-Y1K" secondAttribute="bottom" constant="20" id="mcQ-YB-SYa"/>
-                            <constraint firstItem="cTs-TV-8SX" firstAttribute="top" secondItem="2Mj-j8-8am" secondAttribute="bottom" id="tmL-EE-CPu"/>
+                            <constraint firstItem="9xO-je-OJC" firstAttribute="trailing" secondItem="Pgt-x7-hbN" secondAttribute="trailingMargin" id="5TQ-Kg-qAO"/>
+                            <constraint firstItem="cTs-TV-8SX" firstAttribute="top" secondItem="2Mj-j8-8am" secondAttribute="bottom" constant="8" id="HGy-5c-CAe"/>
+                            <constraint firstAttribute="centerX" secondItem="cTs-TV-8SX" secondAttribute="centerX" id="XbA-Ql-T1H"/>
+                            <constraint firstItem="9xO-je-OJC" firstAttribute="leading" secondItem="Pgt-x7-hbN" secondAttribute="leadingMargin" id="YFe-xI-hCd"/>
+                            <constraint firstAttribute="centerX" secondItem="4Hz-kf-Y1K" secondAttribute="centerX" id="b23-h5-AQH"/>
+                            <constraint firstItem="cTs-TV-8SX" firstAttribute="trailing" secondItem="Pgt-x7-hbN" secondAttribute="trailingMargin" id="bCm-60-MT2"/>
+                            <constraint firstItem="cTs-TV-8SX" firstAttribute="leading" secondItem="Pgt-x7-hbN" secondAttribute="leadingMargin" id="d3j-l1-E1N"/>
+                            <constraint firstItem="4Hz-kf-Y1K" firstAttribute="leading" secondItem="Pgt-x7-hbN" secondAttribute="leadingMargin" id="dPV-dt-sNH"/>
+                            <constraint firstItem="4Hz-kf-Y1K" firstAttribute="trailing" secondItem="Pgt-x7-hbN" secondAttribute="trailingMargin" id="jBZ-pM-mFl"/>
+                            <constraint firstItem="wcG-9c-VIx" firstAttribute="top" secondItem="4Hz-kf-Y1K" secondAttribute="bottom" constant="20" id="jir-Im-cA3"/>
+                            <constraint firstAttribute="centerY" secondItem="9xO-je-OJC" secondAttribute="centerY" constant="17" id="ntT-uA-82u"/>
+                            <constraint firstAttribute="centerX" secondItem="9xO-je-OJC" secondAttribute="centerX" id="v7x-tB-JOF"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
